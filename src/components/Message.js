@@ -5,6 +5,7 @@ import axios from "axios";
 import useGetMessage from "../hooks/useGetMessage.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessage } from "../utils/messageSlice.js";
+import { BASE_URI } from "../utils/constant.js";
 
 const Message = () => {
   const message = useRef("");
@@ -35,7 +36,7 @@ const Message = () => {
       message.current.value = "";
 
       // Send the message to the backend (if needed)
-      await axios.post("http://localhost:4500/api/v1/create", {
+      await axios.post(`${BASE_URI}api/v1/create`, {
         user: user,
         message: newMessage,
       });
@@ -43,32 +44,31 @@ const Message = () => {
       console.log(error);
     }
   };
-  if (messages.length === 0) {
-    return null;
-  }
+
   return (
     <div className="w-screen h-screen bg-gray-200">
       <Header />
 
       <div className="left-0 right-0 flex flex-col justify-center w-2/3 pt-6 mx-auto">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className="flex items-center px-4 py-2 my-1 bg-white rounded-lg"
-          >
-            <div className="flex items-center justify-center px-2 py-1 mx-1 bg-gray-200 rounded-lg">
-              <img
-                src={logo}
-                alt="usericon"
-                className="w-10 h-10 rounded-full "
-              />
-              <h3 className="px-2 text-lg text-black">
-                {message.userName === user.name ? "You" : "anonymous"}
-              </h3>
+        {messages &&
+          messages.map((message, index) => (
+            <div
+              key={index}
+              className="flex items-center px-4 py-2 my-1 bg-white rounded-lg"
+            >
+              <div className="flex items-center justify-center px-2 py-1 mx-1 bg-gray-200 rounded-lg">
+                <img
+                  src={logo}
+                  alt="usericon"
+                  className="w-10 h-10 rounded-full "
+                />
+                <h3 className="px-2 text-lg text-black">
+                  {message.userName === user.name ? "You" : "anonymous"}
+                </h3>
+              </div>
+              <p className="text-black ">{message.message}</p>
             </div>
-            <p className="text-black ">{message.message}</p>
-          </div>
-        ))}
+          ))}
         <div className="flex ml-10 w-fll">
           <input
             ref={message}

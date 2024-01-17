@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../utils/userSlice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BASE_URI } from "../utils/constant";
 
 const Login = () => {
   const [issignIn, setIsSignIn] = useState(true);
@@ -28,14 +29,11 @@ const Login = () => {
           return;
         }
 
-        const response = await axios.post(
-          "http://localhost:4500/api/v1/register",
-          {
-            name: name.current.value,
-            email: email.current.value,
-            password: password.current.value,
-          }
-        );
+        const response = await axios.post(`${BASE_URI}register`, {
+          name: name.current.value,
+          email: email.current.value,
+          password: password.current.value,
+        });
 
         // Assuming your backend sends back the user data upon successful registration
         const user = response.data.user;
@@ -50,13 +48,10 @@ const Login = () => {
           return;
         }
 
-        const response = await axios.post(
-          "http://localhost:4500/api/v1/login",
-          {
-            email: email.current.value,
-            password: password.current.value,
-          }
-        );
+        const response = await axios.post(`${BASE_URI}api/v1/login`, {
+          email: email.current.value,
+          password: password.current.value,
+        });
 
         // Assuming your backend sends back the user data upon successful registration
         const user = response.data.user;

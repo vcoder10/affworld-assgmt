@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logout } from "../utils/userSlice";
+import { BASE_URI } from "../utils/constant";
 const Header = () => {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const Header = () => {
       if (!confirmLogout) {
         return;
       }
-      const response = await axios.get("http://localhost:4500/api/v1/logout");
+      const response = await axios.get(`${BASE_URI}api/v1/logout`);
 
       // Check if the request was successful
       if (response.status === 200) {
