@@ -1,14 +1,25 @@
 import Login from "./components/Login.js";
 import Message from "./components/Message.js";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function App() {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   return (
-    <div className="bg-gray-200 w-screen h-screen">
+    <div className="w-screen h-screen bg-gray-200">
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/message" element={<Message />} />
+          <Route
+            path="/message"
+            element={isAuthenticated ? <Message /> : <Navigate to="/login" />}
+          />
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>
     </div>
