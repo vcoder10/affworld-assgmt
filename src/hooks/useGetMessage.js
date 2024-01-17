@@ -10,7 +10,7 @@ const useGetMessage = (message) => {
       const response = await axios.get("http://localhost:4500/api/v1/messages");
       dispatch(addAllMessages(response.data.messages));
     } catch (err) {
-      console.log(err);
+      console.error("Error fetching messages:", err.message);
     }
   };
 
