@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 function App() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   return (
-    <div className="w-screen h-screen bg-gray-200">
+    <div className="w-screen bg-gray-200 overflow-hidden">
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />

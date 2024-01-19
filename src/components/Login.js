@@ -48,7 +48,7 @@ const Login = () => {
           return;
         }
 
-        const response = await axios.post(`${BASE_URI}api/v1/login`, {
+        const response = await axios.post(`${BASE_URI}/login`, {
           email: email.current.value,
           password: password.current.value,
         });
@@ -71,7 +71,7 @@ const Login = () => {
     <div className="w-screen h-screen bg-gray-200">
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute left-0 right-0 w-3/12 p-12 mx-auto my-32 bg-gray-700 bg-opacity-100 rounded-lg"
+        className="absolute left-0 right-0 w-full md:w-3/12 p-12 mx-auto my-32 bg-gray-700 bg-opacity-100 rounded-lg"
       >
         <h1 className="py-4 text-2xl font-bold text-blue-500">
           {issignIn ? "Sign In" : "Sign Up"}

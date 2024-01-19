@@ -8,7 +8,7 @@ const useGetMessage = (message) => {
   const dispatch = useDispatch();
   const getAllMessages = async () => {
     try {
-      const response = await axios.get(`${BASE_URI}api/v1/messages`);
+      const response = await axios.get(`${BASE_URI}messages`);
       dispatch(addAllMessages(response.data.messages));
     } catch (err) {
       console.error("Error fetching messages:", err.message);
